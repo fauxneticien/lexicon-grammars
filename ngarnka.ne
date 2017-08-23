@@ -4,6 +4,7 @@ record -> lexeme
           headwordSound:?
           partOfSpeech
           senseEntry:+
+          dateStamp
 
 lexeme            -> "\\lx " validLexeme
   validLexeme   -> "-":? [a-z]:+
@@ -44,13 +45,20 @@ partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
 
 senseEntry -> senseNumber:?
         glossEnglish
-          definitionEnglish
-              semanticDomain:+
-              reverseEnglish:+
+        definitionEnglish
+            semanticDomain:+
+            reverseEnglish:+
         variantForm:*
         synonym:*
         scientificName:*
         example:*
+        source:*
+        crossReference:*
+        picture:*
+        encyclopedicInformationEnglish:?
+        usageEnglish:?
+        notesGeneral:?
+        subEntry:*
               
     senseNumber -> _NL "\\sn "  [\d]:+
     glossEnglish -> _NL "\\ge " [0-9|A-Z|a-z|_]:+
@@ -88,17 +96,47 @@ senseEntry -> senseNumber:?
                           | "ZZZZ Sealed"
 
   reverseEnglish -> _NL "\\re " _ABNL
-  variantForm -> _NL "\\va " "-":? [a-z]:+
-  synonym -> _NL "\\sy " "-":? [a-z]:+
+  variantForm -> _NL "\\va " validLexeme
+  synonym -> _NL "\\sy " validLexeme
   scientificName -> _NL "\\sc " [A-Z|a-z|\s|.]:+
 
   example -> exampleVernacular
              exampleSentenceAudio:?
              exampleEnglishFreeTranslation
+             referenceForExample
+
     exampleVernacular -> _NL "\\xv " _ABNL
     exampleSentenceAudio -> _NL "\\sfx " validExampleSentenceAudio
       validExampleSentenceAudio -> "DICT_Audio\\" [^\\]:+ "\\" [^.]:+ ".mp3"
     exampleEnglishFreeTranslation -> _NL "\\xe " _ABNL
+    referenceForExample -> _NL "\\rf " _ABNL
+
+  source -> _NL "\\so " _ABNL
+  crossReference -> _NL "\\cf " validLexeme
+  
+  picture -> _NL "\\pc " _ABNL
+  
+  encyclopedicInformationEnglish -> _NL "\\ee " _ABNL
+  usageEnglish -> _NL "\\ue " _ABNL
+  notesGeneral -> _NL "\\nt " _ABNL
+  
+  subEntry -> _NL "\\se " _ABNL
+          glossEnglish:?
+          definitionEnglish
+            semanticDomain:*
+            reverseEnglish:*
+          variantForm:*
+          synonym:*
+          scientificName:*
+          example:*
+          source:*
+          crossReference:*
+          picture:*
+          encyclopedicInformationEnglish:?
+          usageEnglish:?
+          notesGeneral:?             
+  
+dateStamp -> _NL "\\dt " [\d] [\d] "/" [A-Z] [a-z] [a-z] "/" [\d] [\d] [\d] [\d]
 
 # Newline
 _NL -> "\n"
