@@ -1,4 +1,4 @@
-# Grammar
+# Ngarnka Lexicon Grammar
 
 record -> lexeme
           headwordSound:?
@@ -30,20 +30,19 @@ lexeme            -> "\\lx " validLexeme
 headwordSound     -> _NL "\\sf " validHeadwordSound
   validHeadwordSound -> "Headword_Sound\\" [^\\]:+ "\\" [^_]:+ "_" [A-Z|a-z]:+ ".mp3"
 
-# TODO: Sort the validPartOfSpeech in alphabetical order
 partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
   validPartOfSpeech -> validNoun
                         | validCoverb
-                        | "v"
                         | "adv"
                         | "case"
-                        | "suf"
                         | "conj"
-                        | "interj"
-                        | "pro"
                         | "dem"
-                        | "quest"
+                        | "interj"
                         | "part"
+                        | "pro"
+                        | "quest"
+                        | "suf"
+                        | "v"
   validNoun   -> "n"   gender
   validCoverb -> "cv"  transitivity
 
