@@ -6,6 +6,24 @@ record -> lexeme
           senseEntry:+
           dateStamp
 
+senseEntry -> senseNumber:?
+        glossEnglish
+        definitionEnglish
+            semanticDomain:+
+            reverseEnglish:+
+        variantForm:*
+        synonym:*
+        scientificName:*
+        example:*
+        source:*
+        crossReference:*
+        picture:*
+        encyclopedicInformationEnglish:?
+        usageEnglish:?
+        notesGeneral:?
+        subEntry:*
+              
+
 lexeme            -> "\\lx " validLexeme
   validLexeme   -> "-":? [a-z]:+
 
@@ -43,23 +61,7 @@ partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
                             | "tr"
                             | "?"
 
-senseEntry -> senseNumber:?
-        glossEnglish
-        definitionEnglish
-            semanticDomain:+
-            reverseEnglish:+
-        variantForm:*
-        synonym:*
-        scientificName:*
-        example:*
-        source:*
-        crossReference:*
-        picture:*
-        encyclopedicInformationEnglish:?
-        usageEnglish:?
-        notesGeneral:?
-        subEntry:*
-              
+
     senseNumber -> _NL "\\sn "  [\d]:+
     glossEnglish -> _NL "\\ge " [0-9|A-Z|a-z|_]:+
     definitionEnglish -> _NL "\\de " _ABNL
@@ -83,7 +85,7 @@ senseEntry -> senseNumber:?
                           | "P Moving"
                           | "Q State"
                           | "R Talking and Looking"
-                          | "S Verbs (Inflecting)"
+                          | "S Verbs"
                           | "T Hitting and Violence"
                           | "U Holding and Taking"
                           | "V Space and Time"
