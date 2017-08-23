@@ -1,10 +1,15 @@
 # Grammar
 
 record -> lexeme
+          headwordSound:?
           partOfSpeech
           senseEntry:+
 
-lexeme            -> "\\lx " "-":? [a-z]:+
+lexeme            -> "\\lx " validLexeme
+  validLexeme   -> "-":? [a-z]:+
+
+headwordSound     -> _NL "\\sf " validHeadwordSound
+  validHeadwordSound -> "Headword_Sound\\" [^\\]:+ "\\" [^_]:+ "_" [A-Z|a-z]:+ ".mp3"
 
 # TODO: Sort the validPartOfSpeech in alphabetical order
 partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
