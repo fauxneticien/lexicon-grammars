@@ -1,40 +1,44 @@
-# Ngarnka Lexicon Grammar
+# Grammar
 
 record -> lexeme
           partOfSpeech
+          senseEntry
 
-lexeme            -> "\\lx " "-":? [a-z]:+ _NL
+lexeme            -> "\\lx " "-":? [a-z]:+
 
 # TODO: Sort the validPartOfSpeech in alphabetical order
-partOfSpeech      -> "\\ps " validPartOfSpeech _NL
+partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
   validPartOfSpeech -> validNoun
                         | validCoverb
+                        | "v"
                         | "adv"
                         | "case"
-                        | "conj"
-                        | "dem"
-                        | "interj"
-                        | "part"
-                        | "pro"
-                        | "quest"
                         | "suf"
-                        | "v"
-  validNoun   -> "n"   _NL gender
-  validCoverb -> "cv"  _NL transitivity
+                        | "conj"
+                        | "interj"
+                        | "pro"
+                        | "dem"
+                        | "quest"
+                        | "part"
+  validNoun   -> "n"   gender
+  validCoverb -> "cv"  transitivity
 
-    gender            -> "\\gd " validGender
+    gender            -> _NL "\\gd " validGender
     validGender         -> "f"
                             | "m"
                             | "n"
                             | "v"
                             | "?"
     
-    transitivity      -> "\\tr " validTransitivity
+    transitivity      -> _NL "\\tr " validTransitivity
     validTransitivity     -> "dtr"
                             | "itr"
                             | "str"
                             | "tr"
                             | "?"
+
+senseEntry -> senseNumber:?
+    senseNumber -> _NL "\\sn " [\d]:+
 
 # Newline
 _NL -> "\n"
