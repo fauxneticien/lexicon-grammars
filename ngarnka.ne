@@ -43,8 +43,8 @@ partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
                         | "quest"
                         | "suf"
                         | "v"
-  validNoun   -> "n"   gender
-  validCoverb -> "cv"  transitivity
+  validNoun   -> "n"   gender oblique
+  validCoverb -> "cv"  transitivity nonPresent imperative
 
     gender            -> _NL "\\gd " validGender
     validGender         -> "f"
@@ -52,6 +52,8 @@ partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
                             | "n"
                             | "v"
                             | "?"
+                            
+    oblique           -> _NL "\\obl" _ABNL "-"
     
     transitivity      -> _NL "\\tr " validTransitivity
     validTransitivity     -> "dtr"
@@ -59,6 +61,8 @@ partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
                             | "str"
                             | "tr"
                             | "?"
+    nonPresent        -> _NL "\\npr" _ABNL
+    imperative        -> _NL "\\imp" _ABNL
 
 
     senseNumber -> _NL "\\sn "  [\d]:+
