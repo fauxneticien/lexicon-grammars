@@ -24,7 +24,7 @@ senseEntry -> senseNumber:?
         subEntry:*
               
 
-lexeme            -> "\\lx " validLexeme 
+lexeme            -> "\\lx " validLexeme
   validLexeme   -> "-":? [a-z]:+ "-":?
 
 headwordSound     -> _NL "\\sf " validHeadwordSound
@@ -66,7 +66,7 @@ partOfSpeech      ->  _NL "\\ps " validPartOfSpeech
 
 
     senseNumber -> _NL "\\sn "  [\d]:+
-    glossEnglish -> _NL "\\ge " [0-9|A-Z|a-z|_]:+
+    glossEnglish -> _NL "\\ge " _ABNL
     definitionEnglish -> _NL "\\de " _ABNL
 
   semanticDomain -> _NL "\\sd " validSemanticDomain
