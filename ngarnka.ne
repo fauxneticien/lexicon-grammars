@@ -24,8 +24,8 @@ senseEntry -> senseNumber:?
         subEntry:*
               
 
-lexeme            -> "\\lx " validLexeme
-  validLexeme   -> "-":? [a-z]:+
+lexeme            -> "\\lx " validLexeme 
+  validLexeme   -> "-":? [a-z]:+ "-":?
 
 headwordSound     -> _NL "\\sf " validHeadwordSound
   validHeadwordSound -> "Headword_Sound\\" [^\\]:+ "\\" [^_]:+ "_" [A-Z|a-z]:+ ".mp3"
